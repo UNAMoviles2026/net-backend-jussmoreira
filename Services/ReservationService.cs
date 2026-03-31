@@ -48,4 +48,17 @@ public class ReservationService : IReservationService
             endTime > r.StartTime
         );
     }
+
+    public async Task<bool> DeleteAsync(Guid id)
+    {
+        var reservation = await _reservationRepository.GetByIdAsync(id);
+
+        if (reservation == null)
+        {
+            return false; // Not found
+        }
+
+        await _reservationRepository.DeleteAsync(reservation);
+        return true; // Success
+    }
 }
