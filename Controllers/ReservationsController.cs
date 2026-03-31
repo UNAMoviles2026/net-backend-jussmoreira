@@ -58,7 +58,7 @@ public class ReservationsController : ControllerBase
             return NotFound(new { message = "Reservation not found" });
         }
 
-        return Ok(new { message = "Reservation deleted successfully" });
+        return NoContent();
     }
 
 }
