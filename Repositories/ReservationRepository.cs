@@ -38,4 +38,14 @@ public class ReservationRepository : IReservationRepository
     _context.Reservations.Remove(reservation);
     await _context.SaveChangesAsync();
   }
+
+  public async Task<List<Reservation>> GetReservationByDateAsync(DateOnly date)
+  {
+    return await _context.Reservations
+        .AsNoTracking()
+        .Where(r => r.Date == date)
+        .OrderBy(r => r.StartTime)
+        .ToListAsync();
+  }
+
 }
